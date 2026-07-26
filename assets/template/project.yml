@@ -1,0 +1,174 @@
+name: __APP__
+options:
+  minimumXcodeGenVersion: 2.46.0
+  deploymentTarget:
+    iOS: "__DEPLOYMENT_TARGET__"
+configs:
+  Local: debug
+  Dev: debug
+  Test: debug
+  Prod: release
+configFiles:
+  Local: Configs/Local.xcconfig
+  Dev: Configs/Dev.xcconfig
+  Test: Configs/Test.xcconfig
+  Prod: Configs/Prod.xcconfig
+packages:
+  __APP__Core:
+    path: Packages/__APP__Core
+  __APP__Design:
+    path: Packages/__APP__Design
+  __APP__Features:
+    path: Packages/__APP__Features
+targets:
+  __APP__:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+        excludes:
+          - App.entitlements
+          - Info.plist
+    dependencies:
+      - package: __APP__Core
+      - package: __APP__Features
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: __APP__
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        UILaunchScreen: {}
+        APP_ENVIRONMENT: "$(APP_ENVIRONMENT)"
+        API_BASE_URL: "$(API_BASE_URL)"
+        WEB_HOST: "$(WEB_HOST)"
+    entitlements:
+      path: App/App.entitlements
+      properties: {}
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+        PRODUCT_BUNDLE_IDENTIFIER: "__BUNDLE_ID__$(BUNDLE_ID_SUFFIX)"
+  __APP__DesignCatalogue:
+    type: application
+    platform: iOS
+    sources:
+      - path: DesignCatalogue
+        excludes:
+          - Info.plist
+    dependencies:
+      - package: __APP__Design
+    info:
+      path: DesignCatalogue/Info.plist
+      properties:
+        CFBundleDisplayName: "__APP__ Design"
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        UILaunchScreen: {}
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "__BUNDLE_ID__.design"
+  __APP__UITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+        excludes:
+          - Info.plist
+    dependencies:
+      - target: __APP__
+    info:
+      path: UITests/Info.plist
+      properties: {}
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "__BUNDLE_ID__.uitests"
+schemes:
+  __APP__ Local:
+    management:
+      shared: true
+    build:
+      targets:
+        __APP__: all
+        __APP__UITests: [test]
+    run:
+      config: Local
+    test:
+      config: Local
+      testPlans:
+        - path: Tests/__APP__.xctestplan
+          defaultPlan: true
+    profile:
+      config: Local
+    analyze:
+      config: Local
+    archive:
+      config: Local
+  __APP__ Dev:
+    management:
+      shared: true
+    build:
+      targets:
+        __APP__: all
+        __APP__UITests: [test]
+    run:
+      config: Dev
+    test:
+      config: Dev
+      testPlans:
+        - path: Tests/__APP__.xctestplan
+          defaultPlan: true
+    profile:
+      config: Dev
+    analyze:
+      config: Dev
+    archive:
+      config: Dev
+  __APP__ Test:
+    management:
+      shared: true
+    build:
+      targets:
+        __APP__: all
+        __APP__UITests: [test]
+    run:
+      config: Test
+    test:
+      config: Test
+      testPlans:
+        - path: Tests/__APP__.xctestplan
+          defaultPlan: true
+    profile:
+      config: Test
+    analyze:
+      config: Test
+    archive:
+      config: Test
+  __APP__ Prod:
+    management:
+      shared: true
+    build:
+      targets:
+        __APP__: all
+        __APP__UITests: [test]
+    run:
+      config: Prod
+    test:
+      config: Prod
+      testPlans:
+        - path: Tests/__APP__.xctestplan
+          defaultPlan: true
+    profile:
+      config: Prod
+    analyze:
+      config: Prod
+    archive:
+      config: Prod
+  __APP__ Design:
+    management:
+      shared: true
+    build:
+      targets:
+        __APP__DesignCatalogue: all
+    run:
+      config: Local

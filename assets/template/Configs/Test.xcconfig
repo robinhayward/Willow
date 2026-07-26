@@ -1,0 +1,6 @@
+#include "Debug.xcconfig"
+
+APP_ENVIRONMENT = Test
+API_BASE_URL = __TEST_API_URL__
+WEB_HOST = __TEST_WEB_HOST__
+BUNDLE_ID_SUFFIX = .test

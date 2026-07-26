@@ -1,0 +1,6 @@
+#include "Release.xcconfig"
+
+APP_ENVIRONMENT = Prod
+API_BASE_URL = __PROD_API_URL__
+WEB_HOST = __PROD_WEB_HOST__
+BUNDLE_ID_SUFFIX =

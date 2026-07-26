@@ -1,0 +1,30 @@
+set shell := ["zsh", "-cu"]
+
+generate:
+    xcodegen generate --spec project.yml
+
+test-core:
+    swift test --package-path Packages/__APP__Core --scratch-path /tmp/__APP__-Core
+
+test-design:
+    swift test --package-path Packages/__APP__Design --scratch-path /tmp/__APP__-Design
+
+test-features:
+    swift test --package-path Packages/__APP__Features --scratch-path /tmp/__APP__-Features
+
+test-packages: test-core test-design test-features
+
+clean-generated-state:
+    rm -rf -- __APP__.xcodeproj/xcuserdata Packages/__APP__Core/.swiftpm Packages/__APP__Design/.swiftpm Packages/__APP__Features/.swiftpm
+
+build-design:
+    xcodebuild -project __APP__.xcodeproj -scheme '__APP__ Design' -configuration Local -destination 'generic/platform=iOS Simulator' -derivedDataPath /tmp/__APP__-Design-DerivedData CODE_SIGNING_ALLOWED=NO build
+
+build-app:
+    xcodebuild -project __APP__.xcodeproj -scheme '__APP__ Local' -configuration Local -destination 'generic/platform=iOS Simulator' -derivedDataPath /tmp/__APP__-App-DerivedData CODE_SIGNING_ALLOWED=NO build
+
+test-ui destination:
+    rm -rf /tmp/__APP__-UITests.xcresult
+    xcodebuild -project __APP__.xcodeproj -scheme '__APP__ Local' -configuration Local -destination '{{destination}}' -derivedDataPath /tmp/__APP__-UITests-DerivedData -resultBundlePath /tmp/__APP__-UITests.xcresult CODE_SIGNING_ALLOWED=NO test
+
+gate: test-packages build-design build-app clean-generated-state

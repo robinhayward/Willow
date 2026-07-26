@@ -1,0 +1,7 @@
+DerivedData/
+.build/
+.swiftpm/
+xcuserdata/
+*.xcresult
+.xcodegen/
+.xcodegen-cache

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Create Modular iOS App"
+  short_description: "Scaffold a modular Swift 6 iOS app"
+  default_prompt: "Use $create-modular-ios-app to create a new modular Swift 6 iOS app."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,26 @@
+{
+  "configurations" : [
+    {
+      "id" : "C7708977-7DFA-4CA6-AE38-4F5D50958B9D",
+      "name" : "Configuration 1",
+      "options" : {}
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:__APP__.xcodeproj",
+      "identifier" : "__APP_TARGET_ID__",
+      "name" : "__APP__"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:__APP__.xcodeproj",
+        "identifier" : "__UI_TEST_TARGET_ID__",
+        "name" : "__APP__UITests"
+      }
+    }
+  ],
+  "version" : 1
+}
