@@ -204,15 +204,28 @@ def generate_project(inputs: ScaffoldInputs) -> None:
     with tempfile.TemporaryDirectory(dir=inputs.destination.parent) as temporary_directory:
         temporary_app = Path(temporary_directory)
         render_template(inputs, temporary_app)
+        run_swift_format(temporary_app)
         run_xcodegen(temporary_app)
         _rewrite_test_plan(inputs, temporary_app)
         _replace_destination(inputs.destination, temporary_app)
 
 
+SWIFT_SOURCE_DIRECTORIES = ("App", "DesignCatalogue", "UITests", "Packages")
+
+
+def run_swift_format(project_directory: Path) -> None:
+    # Import order depends on the app name, so no fixed template order passes lint.
+    _run(["swift", "format", "--in-place", "--recursive", *SWIFT_SOURCE_DIRECTORIES], project_directory)
+
+
 def run_xcodegen(project_directory: Path) -> None:
+    _run(["xcodegen", "generate", "--spec", "project.yml", "--project", str(project_directory)], project_directory)
+
+
+def _run(command: list[str], project_directory: Path) -> None:
     try:
         subprocess.run(
-            ["xcodegen", "generate", "--spec", "project.yml", "--project", str(project_directory)],
+            command,
             cwd=project_directory,
             check=True,
             capture_output=True,
@@ -286,7 +299,7 @@ def main() -> int:
     except (GenerationError, ValueError) as error:
         print(error)
         return 1
-    print(f"Created {(inputs.destination.resolve() / f'{inputs.name}.xcodeproj')}")
+    print(f"Created {(inputs.destination.resolve() / f'{inputs.name}.xcworkspace')}")
     return 0
 
 

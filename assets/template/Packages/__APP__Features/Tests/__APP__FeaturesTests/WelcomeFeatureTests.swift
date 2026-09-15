@@ -9,7 +9,6 @@ private struct StubWelcomeProvider: WelcomeProviding {
 }
 
 @Test
-@MainActor
 func loadPublishesProviderMessage() async {
     let feature = WelcomeFeature(provider: StubWelcomeProvider())
 

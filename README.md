@@ -14,7 +14,7 @@ XcodeGen and Swift 6. It generates a ready-to-open Xcode project without Tuist.
 
 ## Requirements
 
-- macOS with Xcode and Swift 6
+- macOS with Xcode 27 or later
 - Python 3
 - [XcodeGen](https://github.com/yonaskolb/XcodeGen)
 - [just](https://github.com/casey/just)
@@ -51,7 +51,7 @@ Ask your agent:
 
 The agent will collect the bundle ID, destination, deployment target, and
 Local/Dev/Test/Prod endpoints it still needs. It then generates the project,
-runs the full gate, and gives you the `.xcodeproj` path to open.
+runs the full gate, and gives you the `.xcworkspace` path to open.
 
 For a fully specified request:
 
@@ -68,9 +68,10 @@ From the generated app directory:
 just gate
 ```
 
-This runs the Core, Design, and Features package tests and builds both the app
-and Design catalogue for a generic iOS Simulator. Run `just generate` after
+This lints Swift sources with `swift format`, runs the Core, Design, and
+Features package tests, and builds the app, UI tests, and Design catalogue for
+a generic iOS Simulator. Run `just generate` after
 editing `project.yml`.
 
-The starter deliberately includes no placeholder App Icon. Add a real AppIcon
-before distributing the app.
+The starter includes a blank Icon Composer `AppIcon.icon`. Replace it before
+distributing the app.

@@ -1,7 +1,6 @@
 import Observation
 import __APP__Core
 
-@MainActor
 @Observable
 public final class WelcomeFeature {
     public private(set) var message = "Loading…"

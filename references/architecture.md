@@ -13,3 +13,8 @@ multiple unrelated descendants genuinely share them.
 
 The starter welcome slice is deliberately disposable. New reusable Design APIs
 require representative `#Preview` states plus a catalogue entry.
+
+Concurrency is Swift 6 with Approachable Concurrency. The app, Design, and
+Features default to `@MainActor`, so never add `@MainActor` there. Core stays
+nonisolated and its service types stay `Sendable`. Mark work that must leave
+the caller's actor `@concurrent`.

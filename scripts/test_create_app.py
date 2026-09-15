@@ -10,6 +10,7 @@ SCRIPTS_DIRECTORY = Path(__file__).parent
 sys.path.insert(0, str(SCRIPTS_DIRECTORY))
 
 from create_app import (  # noqa: E402
+    TEMPLATE_DIRECTORY,
     GenerationError,
     ScaffoldInputs,
     generate_project,
@@ -79,6 +80,18 @@ class CreateAppTests(unittest.TestCase):
         self.addCleanup(self.template_patch.stop)
         self.addCleanup(self.template_directory.cleanup)
 
+    def test_template_workspace_references_project_and_packages(self) -> None:
+        workspace = (
+            TEMPLATE_DIRECTORY / "__APP__.xcworkspace" / "contents.xcworkspacedata"
+        ).read_text()
+        for location in (
+            "group:__APP__.xcodeproj",
+            "group:Packages/__APP__Core",
+            "group:Packages/__APP__Design",
+            "group:Packages/__APP__Features",
+        ):
+            self.assertIn(location, workspace)
+
     def test_rejects_invalid_module_name(self) -> None:
         with self.assertRaisesRegex(ValueError, "Swift module"):
             validate_inputs(valid_inputs(name="not valid"))
@@ -132,6 +145,7 @@ class CreateAppTests(unittest.TestCase):
             inputs = valid_inputs(destination=Path(directory) / "SampleApp")
             with (
                 patch("create_app.shutil.which", return_value="xcodegen"),
+                patch("create_app.run_swift_format"),
                 patch("create_app.run_xcodegen", side_effect=fake_xcodegen),
             ):
                 generate_project(inputs)
@@ -143,6 +157,7 @@ class CreateAppTests(unittest.TestCase):
             inputs = valid_inputs(destination=Path(directory) / "SampleApp")
             with (
                 patch("create_app.shutil.which", return_value="xcodegen"),
+                patch("create_app.run_swift_format"),
                 patch(
                     "create_app.run_xcodegen", side_effect=GenerationError("failed")
                 ),

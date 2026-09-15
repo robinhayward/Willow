@@ -1,6 +1,13 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
+
+let swiftSettings: [SwiftSetting] = [
+    .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+    .enableUpcomingFeature("InferIsolatedConformances"),
+    .enableUpcomingFeature("MemberImportVisibility"),
+    .defaultIsolation(MainActor.self),
+]
 
 let package = Package(
     name: "__APP__Features",
@@ -19,12 +26,12 @@ let package = Package(
         .target(
             name: "__APP__Features",
             dependencies: ["__APP__Core", "__APP__Design"],
-            swiftSettings: [.swiftLanguageMode(.v6)]
+            swiftSettings: swiftSettings
         ),
         .testTarget(
             name: "__APP__FeaturesTests",
             dependencies: ["__APP__Features", "__APP__Core"],
-            swiftSettings: [.swiftLanguageMode(.v6)]
+            swiftSettings: swiftSettings
         ),
     ]
 )

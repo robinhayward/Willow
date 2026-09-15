@@ -7,7 +7,6 @@ public struct RootFeatureView: View {
     private let environmentName: String
     @State private var feature: WelcomeFeature
 
-    @MainActor
     public init(
         appName: String,
         environmentName: String,
