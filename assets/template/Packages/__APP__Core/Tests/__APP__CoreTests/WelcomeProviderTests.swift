@@ -3,7 +3,7 @@ import Testing
 
 @Test
 func liveProviderBuildsWelcomeMessage() async {
-    let provider = LiveWelcomeProvider(appName: "Sample", environmentName: "Local")
+    let provider = LiveWelcomeProvider(appName: "Sample", environmentName: "Dev")
 
-    #expect(await provider.message() == "Sample is ready for Local.")
+    #expect(await provider.message() == "Sample is ready for Dev.")
 }

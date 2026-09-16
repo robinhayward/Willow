@@ -7,7 +7,7 @@ XcodeGen and Swift 6. It generates a ready-to-open Xcode project without Tuist.
 
 - Separate `<App>Core`, `<App>Design`, and `<App>Features` Swift packages
 - A small app-composition target and a fast Design catalogue target
-- Local, Dev, Test, and Prod configurations with matching schemes
+- Dev, Staging, and Prod configurations with matching schemes
 - Environment-specific xcconfig files
 - Package tests, an app UI smoke test, previews, privacy metadata, localization,
   and a `just gate` command
@@ -50,14 +50,14 @@ Ask your agent:
 > Use the create-modular-ios-app skill to create a new app named Acme.
 
 The agent will collect the bundle ID, destination, deployment target, and
-Local/Dev/Test/Prod endpoints it still needs. It then generates the project,
+Dev/Staging/Prod endpoints it still needs. It then generates the project,
 runs the full gate, and gives you the `.xcworkspace` path to open.
 
 For a fully specified request:
 
 > Use the create-modular-ios-app skill to create Acme in ~/Developer with bundle
 > ID com.example.acme and iOS deployment target 26.0. Use
-> http://127.0.0.1:8000 and 127.0.0.1 for Local, and ask me for the remaining
+> http://127.0.0.1:8000 and 127.0.0.1 for Dev, and ask me for the remaining
 > environment endpoints.
 
 ## Verify a generated app

@@ -22,7 +22,7 @@ TARGET_PATTERN = re.compile(
     r"(?ms)^\s*([A-F0-9]{24}) /\* ([^*]+) \*/ = \{\s*"
     r"isa = PBXNativeTarget;.*?^\s*\};"
 )
-ENVIRONMENTS = ("Local", "Dev", "Test", "Prod")
+ENVIRONMENTS = ("Dev", "Staging", "Prod")
 UNSAFE_URL_TOKENS = ("#", "$(", "${", "/*", "*/")
 
 
@@ -177,12 +177,10 @@ def _template_replacements(inputs: ScaffoldInputs) -> dict[str, str]:
         "__APP__": inputs.name,
         "__BUNDLE_ID__": inputs.bundle_id,
         "__DEPLOYMENT_TARGET__": inputs.deployment_target,
-        "__LOCAL_API_URL__": xcconfig_url(inputs.api_urls["Local"]),
-        "__LOCAL_WEB_HOST__": inputs.web_hosts["Local"],
         "__DEV_API_URL__": xcconfig_url(inputs.api_urls["Dev"]),
         "__DEV_WEB_HOST__": inputs.web_hosts["Dev"],
-        "__TEST_API_URL__": xcconfig_url(inputs.api_urls["Test"]),
-        "__TEST_WEB_HOST__": inputs.web_hosts["Test"],
+        "__STAGING_API_URL__": xcconfig_url(inputs.api_urls["Staging"]),
+        "__STAGING_WEB_HOST__": inputs.web_hosts["Staging"],
         "__PROD_API_URL__": xcconfig_url(inputs.api_urls["Prod"]),
         "__PROD_WEB_HOST__": inputs.web_hosts["Prod"],
     }
@@ -272,7 +270,7 @@ def parse_args(arguments: list[str] | None = None) -> ScaffoldInputs:
     parser.add_argument("--bundle-id", required=True)
     parser.add_argument("--destination", required=True, type=Path)
     parser.add_argument("--deployment-target", required=True)
-    for environment in ("local", "dev", "test", "prod"):
+    for environment in ("dev", "staging", "prod"):
         parser.add_argument(f"--{environment}-api-url", required=True)
         parser.add_argument(f"--{environment}-web-host", required=True)
     values = parser.parse_args(arguments)

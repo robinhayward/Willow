@@ -9,7 +9,7 @@ Run `just gate` for lint, package tests, and generic simulator builds of the
 app, UI tests, and Design catalogue. `just format` fixes lint style issues. Regenerate the
 Xcode project after editing `project.yml` with `just generate`.
 
-Local, Dev, Test, and Prod values live in `Configs/`. These files contain
+Dev, Staging, and Prod values live in `Configs/`. These files contain
 public environment endpoints only; never store secrets in the app bundle.
 
 Concurrency uses Swift 6 with Approachable Concurrency. The app, Design, and

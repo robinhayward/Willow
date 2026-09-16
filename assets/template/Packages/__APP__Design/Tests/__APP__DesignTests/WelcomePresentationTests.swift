@@ -5,11 +5,11 @@ import Testing
 func presentationPreservesValues() {
     let presentation = WelcomePresentation(
         appName: "Sample",
-        environmentName: "Local",
+        environmentName: "Dev",
         message: "Ready"
     )
 
     #expect(presentation.appName == "Sample")
-    #expect(presentation.environmentName == "Local")
+    #expect(presentation.environmentName == "Dev")
     #expect(presentation.message == "Ready")
 }

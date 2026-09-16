@@ -34,7 +34,7 @@ public struct WelcomeScreen: View {
     WelcomeScreen(
         presentation: WelcomePresentation(
             appName: "Sample",
-            environmentName: "Local",
+            environmentName: "Dev",
             message: "Loading…"
         ),
         onRefresh: {}

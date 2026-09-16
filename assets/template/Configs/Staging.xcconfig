@@ -1,0 +1,6 @@
+#include "Debug.xcconfig"
+
+APP_ENVIRONMENT = Staging
+API_BASE_URL = __STAGING_API_URL__
+WEB_HOST = __STAGING_WEB_HOST__
+BUNDLE_ID_SUFFIX = .staging

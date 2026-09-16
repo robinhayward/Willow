@@ -1,6 +1,6 @@
 ---
 name: create-modular-ios-app
-description: Create a new modular SwiftUI iOS app with Xcode 27, XcodeGen, Swift 6 main-actor-by-default concurrency, separate Core, Design, and Features packages, a Design catalogue target, Local/Dev/Test/Prod schemes, xcconfig files, and command-line tests, all wrapped in an Xcode workspace. Use when starting a new modular iOS app. Do not use for adding a feature to an existing app.
+description: Create a new modular SwiftUI iOS app with Xcode 27, XcodeGen, Swift 6 main-actor-by-default concurrency, separate Core, Design, and Features packages, a Design catalogue target, Dev/Staging/Prod schemes, xcconfig files, and command-line tests, all wrapped in an Xcode workspace. Use when starting a new modular iOS app. Do not use for adding a feature to an existing app.
 ---
 
 # Create Modular iOS App

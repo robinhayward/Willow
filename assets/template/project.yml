@@ -8,14 +8,12 @@ options:
   deploymentTarget:
     iOS: "__DEPLOYMENT_TARGET__"
 configs:
-  Local: debug
   Dev: debug
-  Test: debug
+  Staging: debug
   Prod: release
 configFiles:
-  Local: Configs/Local.xcconfig
   Dev: Configs/Dev.xcconfig
-  Test: Configs/Test.xcconfig
+  Staging: Configs/Staging.xcconfig
   Prod: Configs/Prod.xcconfig
 packages:
   __APP__Core:
@@ -93,26 +91,6 @@ targets:
         STRING_CATALOG_GENERATE_SYMBOLS: NO
         SWIFT_EMIT_LOC_STRINGS: NO
 schemes:
-  __APP__ Local:
-    management:
-      shared: true
-    build:
-      targets:
-        __APP__: all
-        __APP__UITests: [test]
-    run:
-      config: Local
-    test:
-      config: Local
-      testPlans:
-        - path: Tests/__APP__.xctestplan
-          defaultPlan: true
-    profile:
-      config: Local
-    analyze:
-      config: Local
-    archive:
-      config: Local
   __APP__ Dev:
     management:
       shared: true
@@ -133,7 +111,7 @@ schemes:
       config: Dev
     archive:
       config: Dev
-  __APP__ Test:
+  __APP__ Staging:
     management:
       shared: true
     build:
@@ -141,18 +119,18 @@ schemes:
         __APP__: all
         __APP__UITests: [test]
     run:
-      config: Test
+      config: Staging
     test:
-      config: Test
+      config: Staging
       testPlans:
         - path: Tests/__APP__.xctestplan
           defaultPlan: true
     profile:
-      config: Test
+      config: Staging
     analyze:
-      config: Test
+      config: Staging
     archive:
-      config: Test
+      config: Staging
   __APP__ Prod:
     management:
       shared: true
@@ -180,4 +158,4 @@ schemes:
       targets:
         __APP__DesignCatalogue: all
     run:
-      config: Local
+      config: Dev

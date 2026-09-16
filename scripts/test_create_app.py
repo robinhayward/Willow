@@ -27,15 +27,13 @@ def valid_inputs(
         destination=destination or Path("SampleApp"),
         deployment_target="17.0",
         api_urls={
-            "Local": "http://localhost:8000",
-            "Dev": "https://dev.example.invalid",
-            "Test": "https://test.example.invalid",
+            "Dev": "http://localhost:8000",
+            "Staging": "https://staging.example.invalid",
             "Prod": "https://api.example.invalid",
         },
         web_hosts={
-            "Local": "localhost",
-            "Dev": "dev.example.invalid",
-            "Test": "test.example.invalid",
+            "Dev": "localhost",
+            "Staging": "staging.example.invalid",
             "Prod": "example.invalid",
         },
     )
@@ -43,7 +41,7 @@ def valid_inputs(
 
 def inputs_with_api_url(api_url: str) -> ScaffoldInputs:
     inputs = valid_inputs()
-    inputs.api_urls["Dev"] = api_url
+    inputs.api_urls["Staging"] = api_url
     return inputs
 
 
