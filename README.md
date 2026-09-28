@@ -1,4 +1,6 @@
-# Create Modular iOS App
+# Willow
+
+## Create Modular iOS App
 
 A reusable Codex and Claude skill for creating modular SwiftUI apps with
 XcodeGen and Swift 6. It generates a ready-to-open Xcode project without Tuist.
