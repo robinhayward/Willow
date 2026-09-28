@@ -18,3 +18,16 @@ Concurrency is Swift 6 with Approachable Concurrency. The app, Design, and
 Features default to `@MainActor`, so never add `@MainActor` there. Core stays
 nonisolated and its service types stay `Sendable`. Mark work that must leave
 the caller's actor `@concurrent`.
+
+Declared exceptions inside a main-actor package:
+
+- Service ports implemented by off-main clients or test actors are
+  `public nonisolated protocol X: Sendable`.
+- Plain data passing through those ports is
+  `public nonisolated struct/enum X: Sendable`.
+
+Plain `nonisolated` only states where code runs; the compiler still checks
+`Sendable` and every isolation boundary. `@unchecked Sendable` and
+`nonisolated(unsafe)` switch that checking off. Use them only for a type with
+its own proven locking, with a comment saying why. Check the SDK first: iOS 27
+already marks types such as `URLSessionWebSocketTask` as `Sendable`.

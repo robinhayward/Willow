@@ -3,6 +3,22 @@
 A reusable Codex and Claude skill for creating modular SwiftUI apps with
 XcodeGen and Swift 6. It generates a ready-to-open Xcode project without Tuist.
 
+## Baseline
+
+| | |
+| --- | --- |
+| Created | 2026-07-26 |
+| Last verified | 2026-09-28 |
+| Xcode | 27.0 (27A266a) |
+| iOS SDK | 27.0 |
+| Swift | 6.4 toolchain, Swift 6 language mode, tools-version 6.2 |
+| XcodeGen | 2.46.0 |
+
+The same Baseline is in `SKILL.md`, so agents can tell when the toolchain has
+moved past it. When that happens, the skill asks to update its template,
+re-runs its tests, and bumps both Baselines. Anyone editing the skill by hand
+should do the same.
+
 ## What it creates
 
 - Separate `<App>Core`, `<App>Design`, and `<App>Features` Swift packages
@@ -42,6 +58,14 @@ ln -sfn ~/Developer/create-modular-ios-app ~/.claude/skills/create-modular-ios-a
 ```
 
 Start a new Codex or Claude session so it discovers the skill.
+
+## Recommended agent tooling
+
+Export Apple's Xcode 27 skills with
+`xcrun agent skills export ~/.claude/skills`, and add the community Swift
+concurrency and SwiftUI plugins at user scope. See
+[references/agent-tooling.md](references/agent-tooling.md) for the list,
+install commands, and why they never go in a checked-in settings file.
 
 ## Use it
 
